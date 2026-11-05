@@ -1,0 +1,384 @@
+
+added 494 packages, and audited 495 packages in 6s
+
+49 packages are looking for funding
+  run `npm fund` for details
+
+8 vulnerabilities (5 low, 3 high)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+Dependencies are up to date
+Running 20 checks on your project...
+20/20 checks passed. No issues detected!
+
+> roadsense-mobile@2.5.1 test
+> node --test tests/*.test.cjs
+
+TAP version 13
+# Subtest: GPS needs real finite coordinates, accuracy and a recent timestamp
+ok 1 - GPS needs real finite coordinates, accuracy and a recent timestamp
+  ---
+  duration_ms: 0.651026
+  type: 'test'
+  ...
+# Subtest: portrait frame letterboxing and detection overlay stay aligned
+ok 2 - portrait frame letterboxing and detection overlay stay aligned
+  ---
+  duration_ms: 0.556095
+  type: 'test'
+  ...
+# Subtest: landscape frame letterboxing and clipping
+ok 3 - landscape frame letterboxing and clipping
+  ---
+  duration_ms: 0.149291
+  type: 'test'
+  ...
+# Subtest: camera chooses a moderate available picture size, never an unsupported hardcoded size
+ok 4 - camera chooses a moderate available picture size, never an unsupported hardcoded size
+  ---
+  duration_ms: 0.255947
+  type: 'test'
+  ...
+# Subtest: capture delay enforces a minimum sequential 400 ms cycle
+ok 5 - capture delay enforces a minimum sequential 400 ms cycle
+  ---
+  duration_ms: 0.10036
+  type: 'test'
+  ...
+# react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+# Each child in a list should have a unique "key" prop.
+# Check the render method of `RoadSenseApp`. See https://react.dev/link/warning-keys for more information.
+# react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+# react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+# Subtest: route A -> route B keeps both fixed markers; vehicle/route reset and app remount preserve them; deletion is explicit
+ok 6 - route A -> route B keeps both fixed markers; vehicle/route reset and app remount preserve them; deletion is explicit
+  ---
+  duration_ms: 751.910077
+  type: 'test'
+  ...
+# Subtest: durable demo store restores fixed coordinates after a fresh store instance
+ok 7 - durable demo store restores fixed coordinates after a fresh store instance
+  ---
+  duration_ms: 1.782327
+  type: 'test'
+  ...
+# Subtest: two routes accumulate records; matching uses actual coordinates, never old fractions
+ok 8 - two routes accumulate records; matching uses actual coordinates, never old fractions
+  ---
+  duration_ms: 0.700867
+  type: 'test'
+  ...
+# Subtest: geographic duplicate across routes is deduplicated, same fraction on distant routes is not
+ok 9 - geographic duplicate across routes is deduplicated, same fraction on distant routes is not
+  ---
+  duration_ms: 1.379172
+  type: 'test'
+  ...
+# Subtest: concurrent additions are serialized and do not lose earlier saved potholes
+ok 10 - concurrent additions are serialized and do not lose earlier saved potholes
+  ---
+  duration_ms: 0.374179
+  type: 'test'
+  ...
+# Subtest: delete only a chosen demo and persist deletion; explicit clear removes demos only
+ok 11 - delete only a chosen demo and persist deletion; explicit clear removes demos only
+  ---
+  duration_ms: 0.512409
+  type: 'test'
+  ...
+# Subtest: failed persistence does not report success or alter previous committed records
+ok 12 - failed persistence does not report success or alter previous committed records
+  ---
+  duration_ms: 0.559016
+  type: 'test'
+  ...
+# Subtest: corrupt or unknown storage is not silently overwritten; only explicit clear recovers
+ok 13 - corrupt or unknown storage is not silently overwritten; only explicit clear recovers
+  ---
+  duration_ms: 0.46033
+  type: 'test'
+  ...
+# Subtest: invalid coordinates and real-community sources cannot enter demo storage
+ok 14 - invalid coordinates and real-community sources cannot enter demo storage
+  ---
+  duration_ms: 0.270611
+  type: 'test'
+  ...
+# Subtest: route corridor matching excludes faraway/parallel points beyond tolerance
+ok 15 - route corridor matching excludes faraway/parallel points beyond tolerance
+  ---
+  duration_ms: 0.335924
+  type: 'test'
+  ...
+# react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+# react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+# Subtest: photo preview -> consent -> upload -> optional AI -> explicit location -> reviewed report
+ok 16 - photo preview -> consent -> upload -> optional AI -> explicit location -> reviewed report
+  ---
+  duration_ms: 277.424013
+  type: 'test'
+  ...
+# react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+# Subtest: presentation media review invokes local demo callback, never a community report endpoint
+ok 17 - presentation media review invokes local demo callback, never a community report endpoint
+  ---
+  duration_ms: 81.416116
+  type: 'test'
+  ...
+# Subtest: uploaded evidence can be explicitly deleted before publishing
+ok 18 - uploaded evidence can be explicitly deleted before publishing
+  ---
+  duration_ms: 63.219574
+  type: 'test'
+  ...
+# Subtest: virtual report positions interpolate along the selected polyline, including endpoints
+ok 19 - virtual report positions interpolate along the selected polyline, including endpoints
+  ---
+  duration_ms: 1.430231
+  type: 'test'
+  ...
+# Subtest: route position uses distance, not vertex count
+ok 20 - route position uses distance, not vertex count
+  ---
+  duration_ms: 0.124033
+  type: 'test'
+  ...
+# Subtest: demo requires actual pothole boxes and repeated overlapping detections
+ok 21 - demo requires actual pothole boxes and repeated overlapping detections
+  ---
+  duration_ms: 0.360835
+  type: 'test'
+  ...
+# Subtest: demo tracker resets for stale frames, nonoverlap and supports normalized resolution changes
+ok 22 - demo tracker resets for stale frames, nonoverlap and supports normalized resolution changes
+  ---
+  duration_ms: 0.145658
+  type: 'test'
+  ...
+# Subtest: Expo SDK 58 rejects the old URI object that produced the screenshot error
+ok 23 - Expo SDK 58 rejects the old URI object that produced the screenshot error
+  ---
+  duration_ms: 151.743758
+  type: 'test'
+  ...
+# Subtest: Expo SDK 58 serializes File-like bytes with JPEG headers and scalar fields
+ok 24 - Expo SDK 58 serializes File-like bytes with JPEG headers and scalar fields
+  ---
+  duration_ms: 16.649985
+  type: 'test'
+  ...
+# Subtest: camera source uses File payloads and keeps presentation on the read-only inference endpoint
+ok 25 - camera source uses File payloads and keeps presentation on the read-only inference endpoint
+  ---
+  duration_ms: 0.403933
+  type: 'test'
+  ...
+1..25
+# tests 25
+# suites 0
+# pass 25
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1842.517878
+Starting Metro Bundler
+
+Android Bundled 5030ms node_modules/expo/AppEntry.js (766 modules)
+
+› android bundles (1):
+_expo/static/js/android/AppEntry-b7b495bc1498be8a4ddf3dba17608237.hbc (2.2MB)
+
+› Files (1):
+metadata.json (153B)
+
+Exported: android-export-sdk58
+
+> roadsense-mobile@2.5.1 test
+> node --test tests/*.test.cjs
+
+TAP version 13
+# Subtest: GPS needs real finite coordinates, accuracy and a recent timestamp
+ok 1 - GPS needs real finite coordinates, accuracy and a recent timestamp
+  ---
+  duration_ms: 0.764065
+  type: 'test'
+  ...
+# Subtest: portrait frame letterboxing and detection overlay stay aligned
+ok 2 - portrait frame letterboxing and detection overlay stay aligned
+  ---
+  duration_ms: 0.654661
+  type: 'test'
+  ...
+# Subtest: landscape frame letterboxing and clipping
+ok 3 - landscape frame letterboxing and clipping
+  ---
+  duration_ms: 0.162273
+  type: 'test'
+  ...
+# Subtest: camera chooses a moderate available picture size, never an unsupported hardcoded size
+ok 4 - camera chooses a moderate available picture size, never an unsupported hardcoded size
+  ---
+  duration_ms: 0.200659
+  type: 'test'
+  ...
+# Subtest: capture delay enforces a minimum sequential 400 ms cycle
+ok 5 - capture delay enforces a minimum sequential 400 ms cycle
+  ---
+  duration_ms: 0.115481
+  type: 'test'
+  ...
+# react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+# Each child in a list should have a unique "key" prop.
+# Check the render method of `RoadSenseApp`. See https://react.dev/link/warning-keys for more information.
+# react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+# react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+# Subtest: route A -> route B keeps both fixed markers; vehicle/route reset and app remount preserve them; deletion is explicit
+ok 6 - route A -> route B keeps both fixed markers; vehicle/route reset and app remount preserve them; deletion is explicit
+  ---
+  duration_ms: 753.794906
+  type: 'test'
+  ...
+# Subtest: durable demo store restores fixed coordinates after a fresh store instance
+ok 7 - durable demo store restores fixed coordinates after a fresh store instance
+  ---
+  duration_ms: 1.521787
+  type: 'test'
+  ...
+# Subtest: two routes accumulate records; matching uses actual coordinates, never old fractions
+ok 8 - two routes accumulate records; matching uses actual coordinates, never old fractions
+  ---
+  duration_ms: 0.693768
+  type: 'test'
+  ...
+# Subtest: geographic duplicate across routes is deduplicated, same fraction on distant routes is not
+ok 9 - geographic duplicate across routes is deduplicated, same fraction on distant routes is not
+  ---
+  duration_ms: 1.328373
+  type: 'test'
+  ...
+# Subtest: concurrent additions are serialized and do not lose earlier saved potholes
+ok 10 - concurrent additions are serialized and do not lose earlier saved potholes
+  ---
+  duration_ms: 0.544347
+  type: 'test'
+  ...
+# Subtest: delete only a chosen demo and persist deletion; explicit clear removes demos only
+ok 11 - delete only a chosen demo and persist deletion; explicit clear removes demos only
+  ---
+  duration_ms: 0.647776
+  type: 'test'
+  ...
+# Subtest: failed persistence does not report success or alter previous committed records
+ok 12 - failed persistence does not report success or alter previous committed records
+  ---
+  duration_ms: 0.576045
+  type: 'test'
+  ...
+# Subtest: corrupt or unknown storage is not silently overwritten; only explicit clear recovers
+ok 13 - corrupt or unknown storage is not silently overwritten; only explicit clear recovers
+  ---
+  duration_ms: 0.498047
+  type: 'test'
+  ...
+# Subtest: invalid coordinates and real-community sources cannot enter demo storage
+ok 14 - invalid coordinates and real-community sources cannot enter demo storage
+  ---
+  duration_ms: 0.307237
+  type: 'test'
+  ...
+# Subtest: route corridor matching excludes faraway/parallel points beyond tolerance
+ok 15 - route corridor matching excludes faraway/parallel points beyond tolerance
+  ---
+  duration_ms: 0.374589
+  type: 'test'
+  ...
+# react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+# react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+# Subtest: photo preview -> consent -> upload -> optional AI -> explicit location -> reviewed report
+ok 16 - photo preview -> consent -> upload -> optional AI -> explicit location -> reviewed report
+  ---
+  duration_ms: 226.560432
+  type: 'test'
+  ...
+# react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+# Subtest: presentation media review invokes local demo callback, never a community report endpoint
+ok 17 - presentation media review invokes local demo callback, never a community report endpoint
+  ---
+  duration_ms: 63.2905
+  type: 'test'
+  ...
+# Subtest: uploaded evidence can be explicitly deleted before publishing
+ok 18 - uploaded evidence can be explicitly deleted before publishing
+  ---
+  duration_ms: 72.456548
+  type: 'test'
+  ...
+# Subtest: virtual report positions interpolate along the selected polyline, including endpoints
+ok 19 - virtual report positions interpolate along the selected polyline, including endpoints
+  ---
+  duration_ms: 1.487595
+  type: 'test'
+  ...
+# Subtest: route position uses distance, not vertex count
+ok 20 - route position uses distance, not vertex count
+  ---
+  duration_ms: 0.144344
+  type: 'test'
+  ...
+# Subtest: demo requires actual pothole boxes and repeated overlapping detections
+ok 21 - demo requires actual pothole boxes and repeated overlapping detections
+  ---
+  duration_ms: 0.259135
+  type: 'test'
+  ...
+# Subtest: demo tracker resets for stale frames, nonoverlap and supports normalized resolution changes
+ok 22 - demo tracker resets for stale frames, nonoverlap and supports normalized resolution changes
+  ---
+  duration_ms: 0.126686
+  type: 'test'
+  ...
+# Subtest: Expo SDK 58 rejects the old URI object that produced the screenshot error
+ok 23 - Expo SDK 58 rejects the old URI object that produced the screenshot error
+  ---
+  duration_ms: 142.699691
+  type: 'test'
+  ...
+# Subtest: Expo SDK 58 serializes File-like bytes with JPEG headers and scalar fields
+ok 24 - Expo SDK 58 serializes File-like bytes with JPEG headers and scalar fields
+  ---
+  duration_ms: 21.865853
+  type: 'test'
+  ...
+# Subtest: camera source uses File payloads and keeps presentation on the read-only inference endpoint
+ok 25 - camera source uses File payloads and keeps presentation on the read-only inference endpoint
+  ---
+  duration_ms: 0.366089
+  type: 'test'
+  ...
+1..25
+# tests 25
+# suites 0
+# pass 25
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1731.96786
+Starting Metro Bundler
+
+Android Bundled 4841ms node_modules/expo/AppEntry.js (766 modules)
+
+› android bundles (1):
+_expo/static/js/android/AppEntry-6cd5347e0175453f90159b6bdb2e120f.hbc (2.2MB)
+
+› Files (1):
+metadata.json (153B)
+
+Exported: android-export-sdk58
