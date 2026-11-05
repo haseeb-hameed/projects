@@ -1,0 +1,38 @@
+{% extends "dash_base.html" %}
+{% from "_macros.html" import status_pill, pay_pill, money %}
+{% block title %}My orders{% endblock %}
+{% block page_title %}My orders{% endblock %}
+{% block content %}
+<form class="row g-2 mb-3">
+  <div class="col-md-5"><input class="form-control" name="q" value="{{ q }}" placeholder="Search order number"></div>
+  <div class="col-md-4">
+    <select class="form-select" name="status">
+      <option value="">All statuses</option>
+      {% for s in statuses %}<option value="{{ s }}" {% if status==s %}selected{% endif %}>{{ s }}</option>{% endfor %}
+    </select>
+  </div>
+  <div class="col-md-3"><button class="btn btn-tide w-100">Filter</button></div>
+</form>
+<div class="table-card">
+  <div class="table-responsive">
+    <table class="table">
+      <thead><tr><th>Order</th><th>Placed</th><th>Pickup</th><th>Delivery</th><th>Status</th><th>Pay</th><th>Total</th></tr></thead>
+      <tbody>
+      {% for o in orders %}
+        <tr>
+          <td><a href="{{ url_for('order_detail', order_id=o.id) }}">{{ o.order_no }}</a></td>
+          <td>{{ o.created_at.strftime('%d %b %Y') }}</td>
+          <td>{{ o.pickup_date.strftime('%d %b') }}</td>
+          <td>{{ o.delivery_date.strftime('%d %b') }}</td>
+          <td>{{ status_pill(o.status) }}</td>
+          <td>{{ pay_pill(o.payment_status) }}</td>
+          <td>{{ money(o.total_amount) }}</td>
+        </tr>
+      {% else %}
+        <tr><td colspan="7" class="text-center py-4 muted">No matching orders.</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

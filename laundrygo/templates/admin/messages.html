@@ -1,0 +1,32 @@
+{% extends "dash_base.html" %}
+{% block title %}Messages{% endblock %}
+{% block page_title %}Contact messages{% endblock %}
+{% block content %}
+<div class="table-card">
+  <div class="table-responsive">
+    <table class="table">
+      <thead><tr><th>When</th><th>From</th><th>Subject</th><th>Message</th><th></th></tr></thead>
+      <tbody>
+      {% for m in messages %}
+        <tr class="{% if not m.is_read %}fw-semibold{% endif %}">
+          <td class="small">{{ m.created_at.strftime('%d %b %Y %H:%M') }}</td>
+          <td>{{ m.name }}<div class="small muted fw-normal">{{ m.email }} {{ m.phone }}</div></td>
+          <td>{{ m.subject }}</td>
+          <td class="small" style="max-width:320px">{{ m.message }}</td>
+          <td>
+            {% if not m.is_read %}
+            <form method="post" action="{{ url_for('mark_message', msg_id=m.id) }}">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button class="btn btn-ghost btn-sm">Mark read</button>
+            </form>
+            {% else %}<span class="muted small">Read</span>{% endif %}
+          </td>
+        </tr>
+      {% else %}
+        <tr><td colspan="5" class="text-center py-4 muted">Inbox is empty.</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,93 @@
+{% extends "dash_base.html" %}
+{% block title %}New booking{% endblock %}
+{% block page_title %}New booking{% endblock %}
+{% block content %}
+<form id="book-form" method="post" data-free-min="{{ free_min or 250 }}" data-pickup-fee="{{ pickup_fee or 40 }}" data-express-fee="{{ express_fee or 80 }}">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <div class="row g-4">
+    <div class="col-lg-8">
+      <div class="soft-card p-3 mb-3">
+        <h2 class="h5 mb-3">1. Services</h2>
+        {% for s in services %}
+        <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 py-3 {% if not loop.last %}border-bottom{% endif %}" data-price="{{ s.price }}">
+          <div>
+            <strong>{{ s.name }}</strong>
+            <div class="small muted">₹{{ '%.0f'|format(s.price) }} / {{ s.unit }} · {{ s.description }}</div>
+          </div>
+          <div class="d-flex align-items-center gap-3">
+            <span class="small fw-bold" data-line>—</span>
+            <div class="qty-ctrl" data-qty>
+              <button type="button" data-step="-1">−</button>
+              <input type="number" min="0" step="{{ '0.5' if s.unit == 'kg' else '1' }}" name="qty_{{ s.id }}" value="0">
+              <button type="button" data-step="1">+</button>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="soft-card p-3 mb-3">
+        <h2 class="h5 mb-3">2. Schedule</h2>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label">Pickup date</label>
+            <input class="form-control" type="date" name="pickup_date" min="{{ today }}" required>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Pickup slot</label>
+            <select class="form-select" name="pickup_slot" required>
+              {% for sl in slots %}<option>{{ sl }}</option>{% endfor %}
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Delivery date</label>
+            <input class="form-control" type="date" name="delivery_date" min="{{ today }}" required>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Delivery slot</label>
+            <select class="form-select" name="delivery_slot" required>
+              {% for sl in slots %}<option>{{ sl }}</option>{% endfor %}
+            </select>
+          </div>
+          <div class="col-12">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="is_express" id="is_express">
+              <label class="form-check-label" for="is_express">Express (next-day delivery, ₹{{ express_fee or 80 }} extra). Delivery must be at least 1 day after pickup.</label>
+            </div>
+            <div class="small muted mt-1">Regular service needs 2 days between pickup and delivery.</div>
+          </div>
+        </div>
+      </div>
+      <div class="soft-card p-3">
+        <h2 class="h5 mb-3">3. Address & payment</h2>
+        <label class="form-label">Pickup address</label>
+        <textarea class="form-control mb-3" name="address" rows="2" required>{{ current_user.address }}, {{ current_user.city }} {{ current_user.pincode }}</textarea>
+        <label class="form-label">Notes for the rider</label>
+        <input class="form-control mb-3" name="notes" placeholder="Gate code, landmark, fabric notes…">
+        <label class="form-label">Pay with</label>
+        <div class="d-flex gap-3">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="payment_method" id="cod" value="COD" checked>
+            <label class="form-check-label" for="cod">Cash on delivery</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="payment_method" id="online" value="Online">
+            <label class="form-check-label" for="online">Pay online</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="book-sum">
+        <h3 class="h5">Summary</h3>
+        <div class="d-flex justify-content-between"><span>Subtotal</span><strong id="sum-sub">₹0</strong></div>
+        <div class="d-flex justify-content-between"><span>Pickup</span><strong id="sum-pickup">₹0</strong></div>
+        <div class="d-flex justify-content-between"><span>Express</span><strong id="sum-express">₹0</strong></div>
+        <hr>
+        <div class="d-flex justify-content-between fs-5"><span>Total</span><strong id="sum-total">₹0</strong></div>
+        <div class="small muted mt-2" id="pickup-hint">Add items to see fees</div>
+        <button class="btn btn-coral w-100 mt-3" type="submit">Confirm booking</button>
+      </div>
+    </div>
+  </div>
+</form>
+{% endblock %}

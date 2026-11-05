@@ -1,0 +1,72 @@
+{% extends "dash_base.html" %}
+{% from "_macros.html" import status_pill, pay_pill, money %}
+{% block title %}{{ order.order_no }}{% endblock %}
+{% block page_title %}Order {{ order.order_no }}{% endblock %}
+{% block content %}
+<div class="row g-4">
+  <div class="col-lg-8">
+    <div class="soft-card p-4 mb-3">
+      <div class="d-flex flex-wrap justify-content-between gap-2 mb-3">
+        <div>{{ status_pill(order.status) }} {{ pay_pill(order.payment_status) }}
+          {% if order.is_express %}<span class="pill pill-out">Express</span>{% endif %}
+        </div>
+        <div class="no-print">
+          {% if order.payment_status != 'Paid' and order.status != 'Cancelled' and not current_user.is_admin() %}
+            <a class="btn btn-tide btn-sm" href="{{ url_for('pay', order_id=order.id) }}">Pay now</a>
+          {% endif %}
+          {% if order.status in ['Pending','Confirmed'] and not current_user.is_admin() %}
+            <form class="d-inline" method="post" action="{{ url_for('cancel_order', order_id=order.id) }}" onsubmit="return confirm('Cancel this order?')">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button class="btn btn-ghost btn-sm">Cancel</button>
+            </form>
+          {% endif %}
+          <button class="btn btn-ghost btn-sm" onclick="window.print()">Print slip</button>
+        </div>
+      </div>
+      <div class="row g-3 small">
+        <div class="col-md-6"><div class="muted">Pickup</div><strong>{{ order.pickup_date.strftime('%d %b %Y') }}</strong><div>{{ order.pickup_slot }}</div></div>
+        <div class="col-md-6"><div class="muted">Delivery</div><strong>{{ order.delivery_date.strftime('%d %b %Y') }}</strong><div>{{ order.delivery_slot }}</div></div>
+        <div class="col-12"><div class="muted">Address</div>{{ order.pickup_address }}</div>
+        {% if order.notes %}<div class="col-12"><div class="muted">Notes</div>{{ order.notes }}</div>{% endif %}
+      </div>
+    </div>
+    <div class="table-card">
+      <table class="table">
+        <thead><tr><th>Service</th><th>Qty</th><th>Rate</th><th>Amount</th></tr></thead>
+        <tbody>
+        {% for it in order.items %}
+          <tr>
+            <td>{{ it.service.name }}</td>
+            <td>{{ it.quantity }} {{ it.service.unit }}</td>
+            <td>{{ money(it.unit_price) }}</td>
+            <td>{{ money(it.subtotal) }}</td>
+          </tr>
+        {% endfor %}
+        <tr><td colspan="3" class="text-end">Subtotal</td><td>{{ money(order.subtotal) }}</td></tr>
+        <tr><td colspan="3" class="text-end">Pickup fee</td><td>{{ money(order.pickup_fee) }}</td></tr>
+        <tr><td colspan="3" class="text-end">Express</td><td>{{ money(order.express_fee) }}</td></tr>
+        <tr><td colspan="3" class="text-end fw-bold">Total</td><td class="fw-bold">{{ money(order.total_amount) }}</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="soft-card p-4">
+      <h3 class="h6 mb-3">Tracking</h3>
+      {% set current_i = statuses.index(order.status) if order.status in statuses else 0 %}
+      <ul class="timeline">
+        {% for s in statuses if s != 'Cancelled' %}
+          {% set i = loop.index0 %}
+          <li class="{% if order.status == 'Cancelled' %}{% elif i < current_i %}done{% elif i == current_i %}current{% endif %}">
+            <strong>{{ s }}</strong>
+            {% if i == current_i and order.status != 'Cancelled' %}<div class="small muted">Current</div>{% endif %}
+          </li>
+        {% endfor %}
+        {% if order.status == 'Cancelled' %}
+          <li class="current"><strong>Cancelled</strong></li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}

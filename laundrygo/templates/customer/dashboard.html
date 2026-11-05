@@ -1,0 +1,42 @@
+{% extends "dash_base.html" %}
+{% from "_macros.html" import status_pill, pay_pill, money %}
+{% block title %}Dashboard{% endblock %}
+{% block page_title %}Hello, {{ current_user.name.split()[0] }}{% endblock %}
+{% block content %}
+<div class="row g-3 mb-4">
+  <div class="col-md-4"><div class="stat-card"><div class="lbl">Orders</div><div class="num">{{ total }}</div></div></div>
+  <div class="col-md-4"><div class="stat-card"><div class="lbl">In progress</div><div class="num">{{ active }}</div></div></div>
+  <div class="col-md-4"><div class="stat-card"><div class="lbl">Spent</div><div class="num">{{ money(spent) }}</div></div></div>
+</div>
+<div class="soft-card p-4 mb-4 d-flex flex-wrap justify-content-between align-items-center gap-3">
+  <div>
+    <h2 class="h5 mb-1">Need a pickup?</h2>
+    <p class="muted mb-0">Choose wash, iron or dry-clean and a slot that suits your day.</p>
+  </div>
+  <a class="btn btn-coral" href="{{ url_for('book') }}">New booking</a>
+</div>
+<div class="table-card">
+  <div class="p-3 border-bottom d-flex justify-content-between">
+    <strong>Recent orders</strong>
+    <a href="{{ url_for('my_orders') }}">View all</a>
+  </div>
+  <div class="table-responsive">
+    <table class="table">
+      <thead><tr><th>Order</th><th>Pickup</th><th>Status</th><th>Payment</th><th>Total</th></tr></thead>
+      <tbody>
+      {% for o in orders %}
+        <tr>
+          <td><a href="{{ url_for('order_detail', order_id=o.id) }}">{{ o.order_no }}</a></td>
+          <td>{{ o.pickup_date.strftime('%d %b') }} · {{ o.pickup_slot }}</td>
+          <td>{{ status_pill(o.status) }}</td>
+          <td>{{ pay_pill(o.payment_status) }}</td>
+          <td>{{ money(o.total_amount) }}</td>
+        </tr>
+      {% else %}
+        <tr><td colspan="5" class="text-center py-4 muted">No orders yet. <a href="{{ url_for('book') }}">Book your first pickup</a>.</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

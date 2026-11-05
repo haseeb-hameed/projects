@@ -1,0 +1,45 @@
+{% extends "dash_base.html" %}
+{% from "_macros.html" import status_pill, pay_pill, money %}
+{% block title %}Orders{% endblock %}
+{% block page_title %}All orders{% endblock %}
+{% block content %}
+<form class="row g-2 mb-3">
+  <div class="col-md-4"><input class="form-control" name="q" value="{{ q }}" placeholder="Order no, name or phone"></div>
+  <div class="col-md-3">
+    <select class="form-select" name="status">
+      <option value="">All statuses</option>
+      {% for s in statuses %}<option value="{{ s }}" {% if status==s %}selected{% endif %}>{{ s }}</option>{% endfor %}
+    </select>
+  </div>
+  <div class="col-md-3">
+    <select class="form-select" name="pay">
+      <option value="">All payments</option>
+      <option value="Paid" {% if pay=='Paid' %}selected{% endif %}>Paid</option>
+      <option value="Pending" {% if pay=='Pending' %}selected{% endif %}>Pending</option>
+    </select>
+  </div>
+  <div class="col-md-2"><button class="btn btn-tide w-100">Filter</button></div>
+</form>
+<div class="table-card">
+  <div class="table-responsive">
+    <table class="table">
+      <thead><tr><th>Order</th><th>Customer</th><th>Pickup</th><th>Delivery</th><th>Status</th><th>Pay</th><th>Total</th></tr></thead>
+      <tbody>
+      {% for o in orders %}
+        <tr>
+          <td><a href="{{ url_for('admin_order_detail', order_id=o.id) }}">{{ o.order_no }}</a></td>
+          <td>{{ o.customer.name }}<div class="small muted">{{ o.customer.phone }}</div></td>
+          <td>{{ o.pickup_date.strftime('%d %b') }}<div class="small muted">{{ o.pickup_slot }}</div></td>
+          <td>{{ o.delivery_date.strftime('%d %b') }}</td>
+          <td>{{ status_pill(o.status) }}</td>
+          <td>{{ pay_pill(o.payment_status) }}</td>
+          <td>{{ money(o.total_amount) }}</td>
+        </tr>
+      {% else %}
+        <tr><td colspan="7" class="text-center py-4 muted">No orders match.</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

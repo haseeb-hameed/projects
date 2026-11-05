@@ -1,0 +1,72 @@
+{% extends "dash_base.html" %}
+{% from "_macros.html" import money %}
+{% block title %}Services{% endblock %}
+{% block page_title %}Service catalogue{% endblock %}
+{% block content %}
+<div class="row g-4">
+  <div class="col-lg-7">
+    <div class="table-card">
+      <div class="table-responsive">
+        <table class="table">
+          <thead><tr><th>Service</th><th>Unit</th><th>Price</th><th></th></tr></thead>
+          <tbody>
+          {% for s in services %}
+            <tr>
+              <td>
+                <i class="bi {{ s.icon }} me-1"></i>{{ s.name }}
+                <div class="small muted">{{ s.description }}</div>
+                {% if not s.is_active %}<span class="pill pill-cancelled">Hidden</span>{% endif %}
+              </td>
+              <td>{{ s.unit }}</td>
+              <td>{{ money(s.price) }}</td>
+              <td class="text-nowrap">
+                <button class="btn btn-ghost btn-sm" data-bs-toggle="collapse" data-bs-target="#ed{{ s.id }}">Edit</button>
+                <form class="d-inline" method="post" action="{{ url_for('toggle_service', service_id=s.id) }}">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                  <button class="btn btn-ghost btn-sm">{{ 'Hide' if s.is_active else 'Show' }}</button>
+                </form>
+              </td>
+            </tr>
+            <tr class="collapse" id="ed{{ s.id }}">
+              <td colspan="4">
+                <form class="row g-2" method="post" action="{{ url_for('edit_service', service_id=s.id) }}">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                  <div class="col-md-4"><input class="form-control" name="name" value="{{ s.name }}"></div>
+                  <div class="col-md-4"><input class="form-control" name="description" value="{{ s.description }}"></div>
+                  <div class="col-md-2">
+                    <select class="form-select" name="unit">
+                      <option value="kg" {% if s.unit=='kg' %}selected{% endif %}>kg</option>
+                      <option value="piece" {% if s.unit=='piece' %}selected{% endif %}>piece</option>
+                    </select>
+                  </div>
+                  <div class="col-md-2"><input class="form-control" name="price" type="number" step="1" value="{{ s.price }}"></div>
+                  <div class="col-md-4"><input class="form-control" name="icon" value="{{ s.icon }}"></div>
+                  <div class="col-md-2"><button class="btn btn-tide">Save</button></div>
+                </form>
+              </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-5">
+    <div class="soft-card p-4">
+      <h2 class="h5">Add service</h2>
+      <form method="post">
+        {{ form.hidden_tag() }}
+        <div class="mb-2">{{ form.name.label(class="form-label") }}{{ form.name(class="form-control") }}</div>
+        <div class="mb-2">{{ form.description.label(class="form-label") }}{{ form.description(class="form-control") }}</div>
+        <div class="row g-2">
+          <div class="col-6">{{ form.unit.label(class="form-label") }}{{ form.unit(class="form-select") }}</div>
+          <div class="col-6">{{ form.price.label(class="form-label") }}{{ form.price(class="form-control") }}</div>
+        </div>
+        <div class="mb-2 mt-2">{{ form.icon.label(class="form-label") }}{{ form.icon(class="form-control", placeholder="bi-droplet") }}</div>
+        <div class="form-check mb-3">{{ form.is_active(class="form-check-input") }} {{ form.is_active.label(class="form-check-label") }}</div>
+        <button class="btn btn-coral">Add</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

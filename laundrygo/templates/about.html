@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}About{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-6">
+        <div class="eyebrow">Our story</div>
+        <h1 class="section-title">A laundry counter that comes to you.</h1>
+        <p class="muted">LaundryGo is an MCA mini project for APJ Abdul Kalam Technological University. It models a real Palakkad laundry that replaced walk-in queues with scheduled pickups, status tracking and a small operations desk.</p>
+        <p class="muted">The platform is a complete web application: customers book washing, ironing and dry-cleaning; riders follow a daily schedule; admins manage orders, payments and service rates — all from the browser.</p>
+        <div class="row g-3 mt-2">
+          <div class="col-6"><div class="info-card"><strong class="font-d fs-4">2026</strong><div class="small muted">Project year</div></div></div>
+          <div class="col-6"><div class="info-card"><strong class="font-d fs-4">KTU</strong><div class="small muted">University</div></div></div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <img class="split-img" src="{{ url_for('static', filename='img/about.jpg') }}" alt="LaundryGo studio">
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section pt-0">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-6">
+        <img class="split-img" src="{{ url_for('static', filename='img/pickup.jpg') }}" alt="Pickup scooter">
+      </div>
+      <div class="col-lg-6">
+        <div class="eyebrow">How we run</div>
+        <h2 class="section-title">People, bags, a hub — and software that keeps them in sync.</h2>
+        <p class="muted">Every order gets a unique ID, a pickup window and a delivery window. Status moves from Pending to Delivered so both the customer and the shop floor see the same truth. Payments can be collected as cash on delivery or marked paid online.</p>
+        <p class="muted mb-0">Submitted by <strong>Muhammed Ajzel</strong> as a demonstration of web development, database design and a practical local problem.</p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

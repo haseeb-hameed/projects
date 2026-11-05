@@ -1,0 +1,72 @@
+{% extends "dash_base.html" %}
+{% from "_macros.html" import status_pill, money %}
+{% block title %}Admin{% endblock %}
+{% block page_title %}Operations overview{% endblock %}
+{% block extra_head %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+{% endblock %}
+{% block content %}
+<div class="row g-3 mb-4">
+  <div class="col-6 col-xl-3"><div class="stat-card"><div class="lbl">Orders</div><div class="num">{{ total_orders }}</div></div></div>
+  <div class="col-6 col-xl-3"><div class="stat-card"><div class="lbl">Customers</div><div class="num">{{ total_customers }}</div></div></div>
+  <div class="col-6 col-xl-3"><div class="stat-card"><div class="lbl">Revenue</div><div class="num">{{ money(revenue) }}</div></div></div>
+  <div class="col-6 col-xl-3"><div class="stat-card"><div class="lbl">Needs action</div><div class="num">{{ pending }}</div></div></div>
+  <div class="col-6 col-xl-3"><div class="stat-card"><div class="lbl">Pickups today</div><div class="num">{{ pickups_today }}</div></div></div>
+  <div class="col-6 col-xl-3"><div class="stat-card"><div class="lbl">Deliveries today</div><div class="num">{{ deliveries_today }}</div></div></div>
+  <div class="col-6 col-xl-3"><div class="stat-card"><div class="lbl">Unread messages</div><div class="num">{{ unread }}</div></div></div>
+</div>
+<div class="row g-3 mb-4">
+  <div class="col-lg-8">
+    <div class="soft-card p-3">
+      <h2 class="h6">Orders · last 7 days</h2>
+      <canvas id="chartOrders" height="120"></canvas>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="soft-card p-3 h-100">
+      <h2 class="h6">Pipeline</h2>
+      {% for s, c in status_counts.items() %}
+        <div class="d-flex justify-content-between py-1 small"><span>{{ s }}</span><strong>{{ c }}</strong></div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+<div class="table-card">
+  <div class="p-3 border-bottom"><strong>Latest orders</strong></div>
+  <div class="table-responsive">
+    <table class="table">
+      <thead><tr><th>Order</th><th>Customer</th><th>Pickup</th><th>Status</th><th>Total</th></tr></thead>
+      <tbody>
+      {% for o in recent %}
+        <tr>
+          <td><a href="{{ url_for('admin_order_detail', order_id=o.id) }}">{{ o.order_no }}</a></td>
+          <td>{{ o.customer.name }}</td>
+          <td>{{ o.pickup_date.strftime('%d %b') }}</td>
+          <td>{{ status_pill(o.status) }}</td>
+          <td>{{ money(o.total_amount) }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
+{% block extra_js %}
+<script>
+const labels = {{ labels|tojson }};
+const counts = {{ counts|tojson }};
+new Chart(document.getElementById('chartOrders'), {
+  type: 'bar',
+  data: {
+    labels,
+    datasets: [{
+      label: 'Orders',
+      data: counts,
+      backgroundColor: '#0f766e',
+      borderRadius: 8
+    }]
+  },
+  options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } } }
+});
+</script>
+{% endblock %}

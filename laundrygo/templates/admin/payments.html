@@ -1,0 +1,53 @@
+{% extends "dash_base.html" %}
+{% from "_macros.html" import money, pay_pill %}
+{% block title %}Payments{% endblock %}
+{% block page_title %}Payments{% endblock %}
+{% block content %}
+<div class="stat-card mb-3" style="max-width:280px"><div class="lbl">Collected</div><div class="num">{{ money(collected) }}</div></div>
+<div class="row g-3">
+  <div class="col-lg-7">
+    <div class="table-card">
+      <div class="p-3 border-bottom"><strong>Received</strong></div>
+      <div class="table-responsive">
+        <table class="table">
+          <thead><tr><th>When</th><th>Order</th><th>Method</th><th>Txn</th><th>Amount</th></tr></thead>
+          <tbody>
+          {% for p in payments %}
+            <tr>
+              <td>{{ p.paid_at.strftime('%d %b %Y %H:%M') }}</td>
+              <td><a href="{{ url_for('admin_order_detail', order_id=p.order_id) }}">{{ p.order.order_no }}</a></td>
+              <td>{{ p.method }}</td>
+              <td class="small">{{ p.transaction_id }}</td>
+              <td>{{ money(p.amount) }}</td>
+            </tr>
+          {% else %}
+            <tr><td colspan="5" class="text-center py-4 muted">No payments yet.</td></tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-5">
+    <div class="table-card">
+      <div class="p-3 border-bottom"><strong>Outstanding</strong></div>
+      <div class="table-responsive">
+        <table class="table">
+          <thead><tr><th>Order</th><th>Customer</th><th>Due</th></tr></thead>
+          <tbody>
+          {% for o in pending_orders %}
+            <tr>
+              <td><a href="{{ url_for('admin_order_detail', order_id=o.id) }}">{{ o.order_no }}</a></td>
+              <td>{{ o.customer.name }}</td>
+              <td>{{ money(o.total_amount) }}</td>
+            </tr>
+          {% else %}
+            <tr><td colspan="3" class="text-center py-4 muted">All clear.</td></tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

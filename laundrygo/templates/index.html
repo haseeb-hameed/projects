@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <span class="kicker"><i class="bi bi-geo-alt-fill"></i> Palakkad · Pickup by 8 PM</span>
+        <h1>Laundry day, <em>without</em> the laundry day.</h1>
+        <p class="hero-copy">Book a pickup in two minutes. We collect, wash, iron or dry-clean, and bring it back folded — tracked every step of the way.</p>
+        <div class="d-flex flex-wrap gap-2 mt-3">
+          <a class="btn btn-coral btn-lg" href="{{ url_for('register') }}">Schedule a pickup</a>
+          <a class="btn btn-ghost btn-lg" href="{{ url_for('services_page') }}">See prices</a>
+        </div>
+        <div class="stat-row">
+          <div><strong>8k+</strong><span>Orders delivered</span></div>
+          <div><strong>24h</strong><span>Express turnaround</span></div>
+          <div><strong>4.9</strong><span>Customer rating</span></div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="hero-art">
+          <img src="{{ url_for('static', filename='img/hero.jpg') }}" alt="LaundryGo delivery at the door">
+          <div class="float-card a">
+            <div class="small text-muted">Today’s pickup</div>
+            <strong>10:00 – 12:00</strong>
+            <div class="small text-success mt-1"><i class="bi bi-check-circle-fill"></i> Rider assigned</div>
+          </div>
+          <div class="float-card b">
+            <div class="small text-muted">Wash & Iron</div>
+            <strong>₹95 / kg</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section pt-0">
+  <div class="container">
+    <div class="text-center mb-4">
+      <div class="eyebrow">How it works</div>
+      <h2 class="section-title">Four steps. Fresh clothes.</h2>
+    </div>
+    <div class="row g-3">
+      {% set steps = [
+        ('01', 'Book online', 'Pick services, a pickup slot and an address. Pay online or on delivery.'),
+        ('02', 'We collect', 'A LaundryGo rider arrives in your chosen window with bags and a digital slip.'),
+        ('03', 'We care', 'Wash, iron or dry-clean in our Palakkad hub. You can watch the status live.'),
+        ('04', 'We deliver', 'Folded, packed and back at your door — usually within 48 hours.')
+      ] %}
+      {% for no, title, copy in steps %}
+      <div class="col-md-6 col-lg-3">
+        <div class="step-card">
+          <div class="step-no">{{ no }}</div>
+          <h3 class="h5">{{ title }}</h3>
+          <p class="muted mb-0">{{ copy }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section pt-0">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-end flex-wrap gap-2 mb-4">
+      <div>
+        <div class="eyebrow">Menu</div>
+        <h2 class="section-title mb-0">Services built for real life</h2>
+      </div>
+      <a class="btn btn-ghost" href="{{ url_for('services_page') }}">Full price list</a>
+    </div>
+    <div class="row g-3">
+      {% for s in services[:6] %}
+      <div class="col-md-6 col-lg-4">
+        <div class="svc-card">
+          <div class="svc-icon"><i class="bi {{ s.icon }}"></i></div>
+          <h3 class="h5">{{ s.name }}</h3>
+          <p class="muted">{{ s.description }}</p>
+          <div class="price-tag">₹{{ '%.0f'|format(s.price) }} <small>/ {{ s.unit }}</small></div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section pt-0">
+  <div class="container">
+    <div class="row g-4 align-items-center">
+      <div class="col-lg-6">
+        <img class="split-img" src="{{ url_for('static', filename='img/fold.jpg') }}" alt="Neatly folded laundry">
+      </div>
+      <div class="col-lg-6">
+        <div class="eyebrow">Why LaundryGo</div>
+        <h2 class="section-title">Built for Kerala’s busy week, not a shopping-mall counter.</h2>
+        <ul class="list-unstyled muted">
+          <li class="mb-2"><i class="bi bi-check2-circle text-success me-2"></i>Doorstep pickup and delivery across Palakkad</li>
+          <li class="mb-2"><i class="bi bi-check2-circle text-success me-2"></i>Live order tracking from pickup to drop</li>
+          <li class="mb-2"><i class="bi bi-check2-circle text-success me-2"></i>Separate loads, fabric-safe detergents</li>
+          <li class="mb-2"><i class="bi bi-check2-circle text-success me-2"></i>COD or simulated online payment</li>
+          <li class="mb-2"><i class="bi bi-check2-circle text-success me-2"></i>Free pickup on orders of ₹250 and above</li>
+        </ul>
+        <a class="btn btn-tide mt-2" href="{{ url_for('register') }}">Create a free account</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section pt-0">
+  <div class="container">
+    <div class="eyebrow">Neighbours</div>
+    <h2 class="section-title">What customers say</h2>
+    <div class="row g-3">
+      {% set quotes = [
+        ('Anjali Menon', 'Kalpathy, Palakkad', 'I used to lose Sunday mornings to laundry. Now a rider takes it before brunch and it comes back pressed.'),
+        ('Rahul Krishnan', 'Thrissur', 'The tracking is actually honest. Picked up, in process, out for delivery — I knew when to be home.'),
+        ('Fathima Nazar', 'Shoranur', 'Dry-cleaning for a silk seti was cheaper than the shop near the bus stand, and they packed it with care.')
+      ] %}
+      {% for name, place, text in quotes %}
+      <div class="col-md-4">
+        <div class="quote-card">
+          <div class="stars mb-2">★★★★★</div>
+          <p>“{{ text }}”</p>
+          <strong>{{ name }}</strong>
+          <div class="small muted">{{ place }}</div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section pt-0">
+  <div class="container">
+    <div class="cta-band d-flex flex-wrap justify-content-between align-items-center gap-3">
+      <div>
+        <h2 class="mb-2">Bag it. We will take it from here.</h2>
+        <p class="mb-0" style="opacity:.85">First pickup takes under two minutes. Demo accounts are ready for your viva.</p>
+      </div>
+      <a class="btn btn-coral btn-lg" href="{{ url_for('book') if current_user.is_authenticated else url_for('register') }}">Book now</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

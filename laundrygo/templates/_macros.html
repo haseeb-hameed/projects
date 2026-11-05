@@ -1,0 +1,20 @@
+{% macro status_pill(status) -%}
+  {% set map = {
+    'Pending': 'pill-pending',
+    'Confirmed': 'pill-confirmed',
+    'Pickup Scheduled': 'pill-pickup',
+    'Picked Up': 'pill-process',
+    'In Process': 'pill-process',
+    'Ready': 'pill-ready',
+    'Out for Delivery': 'pill-out',
+    'Delivered': 'pill-delivered',
+    'Cancelled': 'pill-cancelled'
+  } %}
+  <span class="pill {{ map.get(status, 'pill-pending') }}">{{ status }}</span>
+{%- endmacro %}
+
+{% macro pay_pill(status) -%}
+  <span class="pill {{ 'pill-paid' if status == 'Paid' else 'pill-unpaid' }}">{{ status }}</span>
+{%- endmacro %}
+
+{% macro money(n) -%}₹{{ '%.0f'|format(n or 0) }}{%- endmacro %}

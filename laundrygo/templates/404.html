@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Not found{% endblock %}
+{% block content %}
+<section class="section text-center">
+  <div class="container">
+    <div class="eyebrow">404</div>
+    <h1 class="section-title">That page is out for delivery.</h1>
+    <p class="muted">We could not find what you asked for.</p>
+    <a class="btn btn-tide" href="{{ url_for('index') }}">Back home</a>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "dash_base.html" %}
+{% block title %}Profile{% endblock %}
+{% block page_title %}Profile{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="col-lg-7">
+    <div class="soft-card p-4">
+      <p class="muted">Email cannot be changed: <strong>{{ current_user.email }}</strong></p>
+      <form method="post">
+        {{ form.hidden_tag() }}
+        <div class="mb-3">{{ form.name.label(class="form-label") }}{{ form.name(class="form-control") }}</div>
+        <div class="mb-3">{{ form.phone.label(class="form-label") }}{{ form.phone(class="form-control") }}</div>
+        <div class="mb-3">{{ form.address.label(class="form-label") }}{{ form.address(class="form-control", rows="2") }}</div>
+        <div class="row g-3">
+          <div class="col-md-6">{{ form.city.label(class="form-label") }}{{ form.city(class="form-control") }}</div>
+          <div class="col-md-6">{{ form.pincode.label(class="form-label") }}{{ form.pincode(class="form-control") }}</div>
+        </div>
+        {% for field in form if field.errors %}
+          {% for e in field.errors %}<div class="text-danger small mt-2">{{ field.label.text }}: {{ e }}</div>{% endfor %}
+        {% endfor %}
+        <button class="btn btn-tide mt-3" type="submit">Save changes</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

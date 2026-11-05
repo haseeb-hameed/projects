@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Services{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="container">
+    <div class="eyebrow">Price list</div>
+    <h1 class="section-title">Honest rates. No surprise add-ons at the door.</h1>
+    <p class="muted mb-4">Pickup is free on orders of ₹250 and above. Express (next-day) is ₹80 extra. Prices include detergent, folding and a digital slip.</p>
+    <div class="row g-3">
+      {% for s in services %}
+      <div class="col-md-6 col-lg-3">
+        <div class="svc-card">
+          <div class="svc-icon"><i class="bi {{ s.icon }}"></i></div>
+          <h3 class="h5">{{ s.name }}</h3>
+          <p class="muted small">{{ s.description }}</p>
+          <div class="price-tag">₹{{ '%.0f'|format(s.price) }} <small>/ {{ s.unit }}</small></div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="cta-band mt-5 d-flex flex-wrap justify-content-between align-items-center gap-3">
+      <div>
+        <h2 class="mb-1">Ready when you are.</h2>
+        <p class="mb-0" style="opacity:.85">Create an account and pick a slot for today or tomorrow.</p>
+      </div>
+      <a class="btn btn-coral" href="{{ url_for('register') }}">Book a pickup</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends "dash_base.html" %}
+{% from "_macros.html" import status_pill %}
+{% block title %}Schedules{% endblock %}
+{% block page_title %}Pickup & delivery · {{ day.strftime('%d %b %Y') }}{% endblock %}
+{% block content %}
+<div class="d-flex gap-2 mb-3">
+  <a class="btn btn-ghost" href="{{ url_for('admin_schedules', day=yesterday) }}">← Previous</a>
+  <a class="btn btn-ghost" href="{{ url_for('admin_schedules') }}">Today</a>
+  <a class="btn btn-ghost" href="{{ url_for('admin_schedules', day=tomorrow) }}">Next →</a>
+  <form class="ms-auto d-flex gap-2">
+    <input class="form-control" type="date" name="day" value="{{ day.isoformat() }}">
+    <button class="btn btn-tide">Go</button>
+  </form>
+</div>
+<div class="row g-3">
+  <div class="col-lg-6">
+    <div class="table-card">
+      <div class="p-3 border-bottom"><strong>Pickups ({{ pickups|length }})</strong></div>
+      <div class="table-responsive">
+        <table class="table">
+          <thead><tr><th>Slot</th><th>Order</th><th>Customer</th><th>Status</th></tr></thead>
+          <tbody>
+          {% for o in pickups %}
+            <tr>
+              <td class="small">{{ o.pickup_slot }}</td>
+              <td><a href="{{ url_for('admin_order_detail', order_id=o.id) }}">{{ o.order_no }}</a></td>
+              <td>{{ o.customer.name }}<div class="small muted">{{ o.customer.phone }}</div></td>
+              <td>{{ status_pill(o.status) }}</td>
+            </tr>
+          {% else %}
+            <tr><td colspan="4" class="text-center py-4 muted">No pickups.</td></tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="table-card">
+      <div class="p-3 border-bottom"><strong>Deliveries ({{ deliveries|length }})</strong></div>
+      <div class="table-responsive">
+        <table class="table">
+          <thead><tr><th>Slot</th><th>Order</th><th>Customer</th><th>Status</th></tr></thead>
+          <tbody>
+          {% for o in deliveries %}
+            <tr>
+              <td class="small">{{ o.delivery_slot }}</td>
+              <td><a href="{{ url_for('admin_order_detail', order_id=o.id) }}">{{ o.order_no }}</a></td>
+              <td>{{ o.customer.name }}<div class="small muted">{{ o.customer.phone }}</div></td>
+              <td>{{ status_pill(o.status) }}</td>
+            </tr>
+          {% else %}
+            <tr><td colspan="4" class="text-center py-4 muted">No deliveries.</td></tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

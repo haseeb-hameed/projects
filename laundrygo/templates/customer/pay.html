@@ -1,0 +1,31 @@
+{% extends "dash_base.html" %}
+{% from "_macros.html" import money %}
+{% block title %}Pay {{ order.order_no }}{% endblock %}
+{% block page_title %}Online payment{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-6">
+    <div class="soft-card p-4">
+      <div class="eyebrow">Simulated gateway</div>
+      <h2 class="h4">Pay {{ money(order.total_amount) }} for {{ order.order_no }}</h2>
+      <p class="muted">This is a demo checkout for the mini project. No real card is charged.</p>
+      <form method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="mb-3">
+          <label class="form-label">Name on card</label>
+          <input class="form-control" value="{{ current_user.name }}" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Card number</label>
+          <input class="form-control" value="4111 1111 1111 1111" required>
+        </div>
+        <div class="row g-3 mb-3">
+          <div class="col-6"><label class="form-label">Expiry</label><input class="form-control" value="12/28" required></div>
+          <div class="col-6"><label class="form-label">CVV</label><input class="form-control" value="123" required></div>
+        </div>
+        <button class="btn btn-coral w-100" type="submit">Pay {{ money(order.total_amount) }}</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

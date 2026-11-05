@@ -1,0 +1,29 @@
+{% extends "dash_base.html" %}
+{% block title %}Customers{% endblock %}
+{% block page_title %}Customers{% endblock %}
+{% block content %}
+<form class="row g-2 mb-3">
+  <div class="col-md-8"><input class="form-control" name="q" value="{{ q }}" placeholder="Name, email or phone"></div>
+  <div class="col-md-4"><button class="btn btn-tide w-100">Search</button></div>
+</form>
+<div class="table-card">
+  <div class="table-responsive">
+    <table class="table">
+      <thead><tr><th>Name</th><th>Contact</th><th>City</th><th>Orders</th><th>Joined</th></tr></thead>
+      <tbody>
+      {% for c in customers %}
+        <tr>
+          <td>{{ c.name }}</td>
+          <td>{{ c.email }}<div class="small muted">{{ c.phone }}</div></td>
+          <td>{{ c.city }} {{ c.pincode }}</td>
+          <td>{{ c.orders|length }}</td>
+          <td>{{ c.created_at.strftime('%d %b %Y') }}</td>
+        </tr>
+      {% else %}
+        <tr><td colspan="5" class="text-center py-4 muted">No customers found.</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

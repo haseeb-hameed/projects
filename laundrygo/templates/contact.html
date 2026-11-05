@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}Contact{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-5">
+        <div class="eyebrow">Talk to us</div>
+        <h1 class="section-title">The hub is in Palakkad. The rider comes to you.</h1>
+        <div class="info-card mb-3">
+          <strong>Address</strong>
+          <div class="muted">LaundryGo Hub, Stadium Bypass<br>Palakkad, Kerala 678001</div>
+        </div>
+        <div class="info-card mb-3">
+          <strong>Hours</strong>
+          <div class="muted">8:00 AM – 8:00 PM · All days</div>
+        </div>
+        <div class="info-card">
+          <strong>Reach</strong>
+          <div class="muted">hello@laundrygo.in<br>+91 98765 43210</div>
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <div class="auth-card" style="width:100%">
+          <h2 class="h4 mb-3">Send a message</h2>
+          <form method="post">
+            {{ form.hidden_tag() }}
+            <div class="row g-3">
+              <div class="col-md-6">
+                {{ form.name.label(class="form-label") }}
+                {{ form.name(class="form-control") }}
+              </div>
+              <div class="col-md-6">
+                {{ form.email.label(class="form-label") }}
+                {{ form.email(class="form-control") }}
+              </div>
+              <div class="col-md-6">
+                {{ form.phone.label(class="form-label") }}
+                {{ form.phone(class="form-control") }}
+              </div>
+              <div class="col-md-6">
+                {{ form.subject.label(class="form-label") }}
+                {{ form.subject(class="form-control") }}
+              </div>
+              <div class="col-12">
+                {{ form.message.label(class="form-label") }}
+                {{ form.message(class="form-control", rows="4") }}
+              </div>
+            </div>
+            {% for field in form if field.errors %}
+              {% for e in field.errors %}<div class="text-danger small mt-2">{{ e }}</div>{% endfor %}
+            {% endfor %}
+            <button class="btn btn-tide mt-3" type="submit">{{ form.submit.label.text }}</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
