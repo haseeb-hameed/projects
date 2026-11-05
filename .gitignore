@@ -1,9 +1,0 @@
-﻿__pycache__/
-*.pyc
-*.db
-laundrygo.db
-.venv/
-venv/
-.env
-.DS_Store
-Thumbs.db
