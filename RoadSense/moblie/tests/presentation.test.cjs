@@ -1,0 +1,7 @@
+const {test}=require('node:test');const assert=require('node:assert/strict');
+const {routeLength,routePoint,demoTrack}=require('../src/demoMath');
+const geometry=[[76,10],[76.01,10],[76.02,10]];
+test('virtual report positions interpolate along the selected polyline, including endpoints',()=>{assert.deepEqual(routePoint(geometry,0),{lon:76,lat:10});assert.deepEqual(routePoint(geometry,1),{lon:76.02,lat:10});assert.ok(Math.abs(routePoint(geometry,.25).lon-76.005)<1e-8);assert.equal(routePoint([],0),null);assert.ok(routeLength(geometry)>2000)});
+test('route position uses distance, not vertex count',()=>{const p=routePoint([[76,10],[76.001,10],[76.02,10]],.5);assert.ok(Math.abs(p.lon-76.01)<1e-8)});
+test('demo requires actual pothole boxes and repeated overlapping detections',()=>{const d={type:'Pothole',confidence:.4,box:[10,10,50,50]};assert.equal(demoTrack(null,[],[100,100],0),null);let a=demoTrack(null,[d],[100,100],0);assert.equal(a.count,1);a=demoTrack(a,[d],[100,100],1000);assert.equal(a.count,2);assert.equal(demoTrack(a,[{...d,confidence:.3}],[100,100],2000),null);assert.equal(demoTrack(a,[{...d,type:'Crack'}],[100,100],2000),null)});
+test('demo tracker resets for stale frames, nonoverlap and supports normalized resolution changes',()=>{const d={type:'Pothole',confidence:.6,box:[10,10,50,50]};const a=demoTrack(null,[d],[100,100],1000);assert.equal(demoTrack(a,[d],[100,100],17000).count,1);assert.equal(demoTrack(a,[{...d,box:[60,60,90,90]}],[100,100],2000).count,1);assert.equal(demoTrack(a,[{...d,box:[20,20,100,100]}],[200,200],2000).count,2)});
