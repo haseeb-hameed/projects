@@ -1,0 +1,5 @@
+react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+Each child in a list should have a unique "key" prop.
+
+Check the render method of `RoadSenseApp`. See https://react.dev/link/warning-keys for more information.
+PASS: mocked React UI select start/end → route → presentation → two model-result fixtures → on-route marker → dedup → reset; no community-write endpoint calls. Native camera/network modules mocked.

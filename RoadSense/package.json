@@ -1,0 +1,24 @@
+{
+  "name": "roadsense",
+  "version": "2.2.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "android": "npm --prefix mobile run android",
+    "test": "playwright test tests/browser.spec.js tests/presentation.spec.js tests/vision.spec.js",
+    "test:api": "python -m pytest tests/test_backend.py -q"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^4.7.0",
+    "leaflet": "^1.9.4",
+    "lucide-react": "^0.468.0",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-native-web": "^0.21.2",
+    "vite": "^6.4.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.1"
+  }
+}

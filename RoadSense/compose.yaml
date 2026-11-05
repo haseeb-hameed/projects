@@ -1,0 +1,30 @@
+services:
+  db:
+    image: postgis/postgis:16-3.4
+    environment:
+      POSTGRES_DB: roadsense
+      POSTGRES_USER: roadsense
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in root .env}
+    volumes:
+      - roadsense-db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U roadsense"]
+      interval: 5s
+      timeout: 5s
+      retries: 15
+  app:
+    build:
+      context: .
+      args:
+        ENABLE_AI: ${ENABLE_AI:-false}
+    ports:
+      - "8001:8001"
+    environment:
+      DATABASE_URL: postgresql+psycopg://roadsense:${DB_PASSWORD}@db:5432/roadsense
+      JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET in root .env}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:8001}
+    depends_on:
+      db:
+        condition: service_healthy
+volumes:
+  roadsense-db:

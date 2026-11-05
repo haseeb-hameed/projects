@@ -1,0 +1,144 @@
+
+added 491 packages, and audited 492 packages in 8s
+
+49 packages are looking for funding
+  run `npm fund` for details
+
+3 high severity vulnerabilities
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+Dependencies are up to date
+Running 20 checks on your project...
+20/20 checks passed. No issues detected!
+
+> roadsense-mobile@2.5.0 test
+> node --test tests/*.test.cjs
+
+TAP version 13
+# Subtest: GPS needs real finite coordinates, accuracy and a recent timestamp
+ok 1 - GPS needs real finite coordinates, accuracy and a recent timestamp
+  ---
+  duration_ms: 0.978779
+  type: 'test'
+  ...
+# Subtest: portrait frame letterboxing and detection overlay stay aligned
+ok 2 - portrait frame letterboxing and detection overlay stay aligned
+  ---
+  duration_ms: 1.169345
+  type: 'test'
+  ...
+# Subtest: landscape frame letterboxing and clipping
+ok 3 - landscape frame letterboxing and clipping
+  ---
+  duration_ms: 0.221414
+  type: 'test'
+  ...
+# Subtest: camera chooses a moderate available picture size, never an unsupported hardcoded size
+ok 4 - camera chooses a moderate available picture size, never an unsupported hardcoded size
+  ---
+  duration_ms: 0.314562
+  type: 'test'
+  ...
+# Subtest: capture delay enforces a minimum sequential 400 ms cycle
+ok 5 - capture delay enforces a minimum sequential 400 ms cycle
+  ---
+  duration_ms: 0.146315
+  type: 'test'
+  ...
+# react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+# react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+# Subtest: photo preview -> consent -> upload -> optional AI -> explicit location -> reviewed report
+ok 6 - photo preview -> consent -> upload -> optional AI -> explicit location -> reviewed report
+  ---
+  duration_ms: 347.039542
+  type: 'test'
+  ...
+# react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+# Subtest: presentation media review invokes local demo callback, never a community report endpoint
+ok 7 - presentation media review invokes local demo callback, never a community report endpoint
+  ---
+  duration_ms: 104.681674
+  type: 'test'
+  ...
+# Subtest: uploaded evidence can be explicitly deleted before publishing
+ok 8 - uploaded evidence can be explicitly deleted before publishing
+  ---
+  duration_ms: 68.581267
+  type: 'test'
+  ...
+# Subtest: virtual report positions interpolate along the selected polyline, including endpoints
+ok 9 - virtual report positions interpolate along the selected polyline, including endpoints
+  ---
+  duration_ms: 1.770091
+  type: 'test'
+  ...
+# Subtest: route position uses distance, not vertex count
+ok 10 - route position uses distance, not vertex count
+  ---
+  duration_ms: 0.191675
+  type: 'test'
+  ...
+# Subtest: demo requires actual pothole boxes and repeated overlapping detections
+ok 11 - demo requires actual pothole boxes and repeated overlapping detections
+  ---
+  duration_ms: 0.37248
+  type: 'test'
+  ...
+# Subtest: demo tracker resets for stale frames, nonoverlap and supports normalized resolution changes
+ok 12 - demo tracker resets for stale frames, nonoverlap and supports normalized resolution changes
+  ---
+  duration_ms: 0.169564
+  type: 'test'
+  ...
+# Subtest: Expo SDK 58 rejects the old URI object that produced the screenshot error
+ok 13 - Expo SDK 58 rejects the old URI object that produced the screenshot error
+  ---
+  duration_ms: 174.983925
+  type: 'test'
+  ...
+# Subtest: Expo SDK 58 serializes File-like bytes with JPEG headers and scalar fields
+ok 14 - Expo SDK 58 serializes File-like bytes with JPEG headers and scalar fields
+  ---
+  duration_ms: 32.499543
+  type: 'test'
+  ...
+# Subtest: camera source uses File payloads and keeps presentation on the read-only inference endpoint
+ok 15 - camera source uses File payloads and keeps presentation on the read-only inference endpoint
+  ---
+  duration_ms: 1.147139
+  type: 'test'
+  ...
+1..15
+# tests 15
+# suites 0
+# pass 15
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1111.201057
+Starting Metro Bundler
+
+Android Bundled 5112ms node_modules/expo/AppEntry.js (757 modules)
+
+› android bundles (1):
+_expo/static/js/android/AppEntry-f920e7572f7d4843a10ea53677145037.hbc (2.1MB)
+
+› Files (1):
+metadata.json (153B)
+
+Exported: android-export-sdk58
+Starting Metro Bundler
+
+Android Bundled 5525ms node_modules/expo/AppEntry.js (757 modules)
+
+› android bundles (1):
+_expo/static/js/android/AppEntry-a6d4fe2d169afd9afa860eefc2f97703.hbc (2.1MB)
+
+› Files (1):
+metadata.json (153B)
+
+Exported: android-export-sdk58

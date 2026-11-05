@@ -1,0 +1,115 @@
+
+added 492 packages, and audited 493 packages in 6s
+
+49 packages are looking for funding
+  run `npm fund` for details
+
+4 high severity vulnerabilities
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+Dependencies are up to date
+Running 21 checks on your project...
+21/21 checks passed. No issues detected!
+
+> roadsense-mobile@2.3.1 test
+> node --test tests/*.test.cjs
+
+TAP version 13
+# Subtest: GPS needs real finite coordinates, accuracy and a recent timestamp
+ok 1 - GPS needs real finite coordinates, accuracy and a recent timestamp
+  ---
+  duration_ms: 0.701655
+  type: 'test'
+  ...
+# Subtest: portrait frame letterboxing and detection overlay stay aligned
+ok 2 - portrait frame letterboxing and detection overlay stay aligned
+  ---
+  duration_ms: 0.585266
+  type: 'test'
+  ...
+# Subtest: landscape frame letterboxing and clipping
+ok 3 - landscape frame letterboxing and clipping
+  ---
+  duration_ms: 0.14913
+  type: 'test'
+  ...
+# Subtest: camera chooses a moderate available picture size, never an unsupported hardcoded size
+ok 4 - camera chooses a moderate available picture size, never an unsupported hardcoded size
+  ---
+  duration_ms: 0.1928
+  type: 'test'
+  ...
+# Subtest: capture delay enforces a minimum sequential 400 ms cycle
+ok 5 - capture delay enforces a minimum sequential 400 ms cycle
+  ---
+  duration_ms: 0.146484
+  type: 'test'
+  ...
+# Subtest: virtual report positions interpolate along the selected polyline, including endpoints
+ok 6 - virtual report positions interpolate along the selected polyline, including endpoints
+  ---
+  duration_ms: 1.289065
+  type: 'test'
+  ...
+# Subtest: route position uses distance, not vertex count
+ok 7 - route position uses distance, not vertex count
+  ---
+  duration_ms: 0.127267
+  type: 'test'
+  ...
+# Subtest: demo requires actual pothole boxes and repeated overlapping detections
+ok 8 - demo requires actual pothole boxes and repeated overlapping detections
+  ---
+  duration_ms: 0.222755
+  type: 'test'
+  ...
+# Subtest: demo tracker resets for stale frames, nonoverlap and supports normalized resolution changes
+ok 9 - demo tracker resets for stale frames, nonoverlap and supports normalized resolution changes
+  ---
+  duration_ms: 0.107622
+  type: 'test'
+  ...
+# Subtest: Expo SDK 57 rejects the old URI object that produced the screenshot error
+ok 10 - Expo SDK 57 rejects the old URI object that produced the screenshot error
+  ---
+  duration_ms: 145.218258
+  type: 'test'
+  ...
+# Subtest: Expo SDK 57 serializes File-like bytes with JPEG headers and scalar fields
+ok 11 - Expo SDK 57 serializes File-like bytes with JPEG headers and scalar fields
+  ---
+  duration_ms: 18.172784
+  type: 'test'
+  ...
+# Subtest: camera source uses File payloads and keeps presentation on the read-only inference endpoint
+ok 12 - camera source uses File payloads and keeps presentation on the read-only inference endpoint
+  ---
+  duration_ms: 5.996311
+  type: 'test'
+  ...
+1..12
+# tests 12
+# suites 0
+# pass 12
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 352.151724
+Starting Metro Bundler
+
+Android Bundled 3916ms node_modules/expo/AppEntry.js (705 modules)
+
+› android bundles (1):
+_expo/static/js/android/AppEntry-aa77924a7501185d0c5d4a334b487b26.hbc (1.9MB)
+
+› Files (1):
+metadata.json (153B)
+
+Exported: android-export-sdk57
